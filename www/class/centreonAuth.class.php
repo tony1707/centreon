@@ -154,7 +154,7 @@ class CentreonAuth
      */
     protected function checkPassword($password, $token = "", $autoimport = false)
     {
-        if ((strlen($password) == 0 || $password == "") && $token == "") {
+        if ((strlen($password['password']) == 0 || $password['password'] == "") && $token == "") {
             $this->passwdOk = 0;
             return;
         }
@@ -265,14 +265,13 @@ class CentreonAuth
      */
     protected function checkUser($username, $password, $token)
     {
-
         if ($this->autologin == 0 || ($this->autologin && $token != "")) {
             $DBRESULT = $this->pearDB->query("SELECT * FROM `contact`
-                WHERE `contact_alias` = '" . $this->pearDB->escape($username, true) . "'
+                WHERE `contact_alias` = '" . $this->pearDB->escape($username['useralias'], true) . "'
                     AND `contact_activate` = '1' AND `contact_register` = '1' LIMIT 1");
         } else {
             $DBRESULT = $this->pearDB->query("SELECT * FROM `contact`
-                WHERE MD5(contact_alias) = '" . $this->pearDB->escape($username, true) . "'
+                WHERE MD5(contact_alias) = '" . $this->pearDB->escape($username['useralias'], true) . "'
                     AND `contact_activate` = '1' AND `contact_register` = '1' LIMIT 1");
         }
         if ($DBRESULT->rowCount()) {
@@ -290,17 +289,17 @@ class CentreonAuth
                     $this->CentreonLog->setUID($this->userInfos["contact_id"]);
                     $this->CentreonLog->insertLog(
                         1,
-                        "[".$this->source."] Contact '" . $username . "' logged in - IP : " .
+                        "[".$this->source."] Contact '" . $username['useralias'] . "' logged in - IP : " .
                         $_SERVER["REMOTE_ADDR"]
                     );
                 } else {
-                    $this->CentreonLog->insertLog(1, "Contact '" . $username . "' doesn't match with password");
+                    $this->CentreonLog->insertLog(1, "Contact '" . $username['useralias'] . "' doesn't match with password");
                     $this->error = _('Your credentials are incorrect.');
                 }
             } else {
                 $this->CentreonLog->insertLog(
                     1,
-                    "[".$this->source."] Contact '" . $username . "' is not enable for reaching centreon"
+                    "[".$this->source."] Contact '" . $username['useralias'] . "' is not enable for reaching centreon"
                 );
                 $this->error = _('Your credentials are incorrect.');
             }
@@ -308,7 +307,7 @@ class CentreonAuth
             /*
              * Add temporary userinfo auth_type
              */
-            $this->userInfos['contact_alias'] = $username;
+            $this->userInfos['contact_alias'] = $username['useralias'];
             $this->userInfos['contact_auth_type'] = "ldap";
             $this->userInfos['contact_email'] = '';
             $this->userInfos['contact_pager'] = '';
@@ -318,7 +317,7 @@ class CentreonAuth
              */
             $DBRESULT = $this->pearDB->query(
                 "SELECT * FROM `contact`
-                    WHERE `contact_alias` = '" . $this->pearDB->escape($username, true) . "'
+                    WHERE `contact_alias` = '" . $this->pearDB->escape($username['useralias'], true) . "'
                         AND `contact_activate` = '1' AND `contact_register` = '1' LIMIT 1"
             );
             if ($DBRESULT->rowCount()) {

@@ -24,15 +24,15 @@
                 <div class="logintab">
                     <table id="logintab1" style="text-align:center;" align="center">
                        <tr>
-                            <td align='right'>{$form.useralias.label}</td>
-                            <td>{$form.useralias.html}</td>
+                            <td align='right'>{$form.elements['useralias-0'].label}</td>
+                            <td>{$form.elements['useralias-0'].html}</td>
                         </tr>
                         <tr>
-                            <td align='right'>{$form.password.label}</td>
-                            <td>{$form.password.html}</td>
+                            <td align='right'>{$form.elements['password-0'].label}</td>
+                            <td>{$form.elements['password-0'].html}</td>
                         </tr>
                         <tr>
-                            <td colspan="2" align='center'>{$form.submitLogin.html}</td>
+                            <td colspan="2" align='center'>{$form.elements['submitLogin-0'].html}</td>
                         </tr>
                     </table>
                 </div>

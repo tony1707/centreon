@@ -40,9 +40,9 @@ require_once _CENTREON_PATH_ . "www/class/centreonContactgroup.class.php";
 /**
  * Quickform
  */
-require_once 'HTML/QuickForm.php';
-require_once 'HTML/QuickForm/select2.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once 'HTML/QuickForm2.php';
+require_once 'HTML/QuickForm2/Element/Select2.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 try {
     $db = new CentreonDB();
@@ -115,7 +115,7 @@ try {
     $template->assign('views', $views);
     $template->assign('empty', $i);
 
-    $formAddView = new HTML_QuickForm(
+    $formAddView = new HTML_QuickForm2(
         'formAddView',
         'post',
         "?p=103",
@@ -129,28 +129,42 @@ try {
         'availableDatasetRoute' => './api/internal.php?object=centreon_home_customview&action=listSharedViews',
         'multiple' => false
     );
-    $formAddView->addElement('select2', 'viewLoad', _("Views"), array(), $arrayView);
+    $formAddView->addElement('Select2', 'viewLoad', array(), $arrayView)
+        ->setLabel(_("Views"));
 
     // New view name
     $attrsText = array("size" => "30");
     $formAddView->addElement('text', 'name', _("Name"), $attrsText);
 
-    $createLoad = array();
-    $createLoad[] = HTML_QuickForm::createElement('radio', 'create_load', null, _("Create new view "), 'create');
-    $createLoad[] = HTML_QuickForm::createElement('radio', 'create_load', null, _("Load from existing view"), 'load');
-    $formAddView->addGroup($createLoad, 'create_load', _("create or load"), '&nbsp;');
-    $formAddView->setDefaults(array('create_load[create_load]' => 'create'));
+//    $createLoad = array();
+//    $createLoad[] = HTML_QuickForm2::createElement('radio', 'create_load', null, _("Create new view "), 'create');
+//    $createLoad[] = HTML_QuickForm2::createElement('radio', 'create_load', null, _("Load from existing view"), 'load');
+//    $formAddView->addGroup($createLoad, 'create_load', _("create or load"), '&nbsp;');
+//    $formAddView->setDefaults(array('create_load[create_load]' => 'create'));
+
+    $createLoad = $formAddView->addFieldset('create_load')->setLabel(_("create or load"));
+    $createLoadGroup = $createLoad->addGroup('name')->setLabel('Name:')->setSeparator(',&nbsp;');
+    $createLoadGroup->addRadio('create_load', null, array(_("Create new view ")), 'create');
+    $createLoadGroup->addRadio('create_load', null, array(_("Load from existing view")), 'load');
 
     /**
      * Layout
      */
-    $layouts[] = HTML_QuickForm::createElement('radio', 'layout', null, _("1 Column"), 'column_1');
-    $layouts[] = HTML_QuickForm::createElement('radio', 'layout', null, _("2 Columns"), 'column_2');
-    $layouts[] = HTML_QuickForm::createElement('radio', 'layout', null, _("3 Columns"), 'column_3');
-    $formAddView->addGroup($layouts, 'layout', _("Layout"), '&nbsp;');
-    $formAddView->setDefaults(array('layout[layout]' => 'column_1'));
+//    $layouts[] = HTML_QuickForm2::createElement('radio', 'layout', null, _("1 Column"), 'column_1');
+//    $layouts[] = HTML_QuickForm2::createElement('radio', 'layout', null, _("2 Columns"), 'column_2');
+//    $layouts[] = HTML_QuickForm2::createElement('radio', 'layout', null, _("3 Columns"), 'column_3');
+//    $formAddView->addGroup($layouts, 'layout', _("Layout"), '&nbsp;');
+//    $formAddView->setDefaults(array('layout[layout]' => 'column_1'));
 
-    $formAddView->addElement('checkbox', 'public', '', _("Public"));
+    $layouts = $formAddView->addFieldset('layout')->setLabel(_("Layout"));
+    $layoutsGroup = $layouts->addGroup('name')->setLabel('Name:')->setSeparator(',&nbsp;');
+    $layoutsGroup->addRadio('layout', null, array(_("1 Column")), 'column_1');
+    $layoutsGroup->addRadio('layout', null, array(_("2 Columns")), 'column_2');
+    $layoutsGroup->addRadio('layout', null, array(_("3 Columns")), 'column_3');
+
+
+
+    $formAddView->addElement('checkbox', 'public', '', array(_("Public")));
 
     /**
      * Submit button
@@ -158,21 +172,21 @@ try {
     $formAddView->addElement('submit', 'submit', _("Submit"), array("class" => "btc bt_success"));
     $formAddView->addElement('reset', 'reset', _("Reset"), array("class" => "btc bt_default"));
     $formAddView->addElement('hidden', 'action');
-    $formAddView->setDefaults(array('action' => 'add'));
+    $formAddView->addDataSource(new HTML_QuickForm2_DataSource_Array(array('action' => 'add')));
 
     /**
      * Renderer
      */
-    $rendererAddView = new HTML_QuickForm_Renderer_ArraySmarty($template, true);
+    $rendererAddView = new HTML_QuickForm2_Renderer_ArraySmarty($template, true);
     $rendererAddView->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $rendererAddView->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
-    $formAddView->accept($rendererAddView);
+    $formAddView->render($rendererAddView);
     $template->assign('formAddView', $rendererAddView->toArray());
 
     /**
      * Form for edit view
      */
-    $formEditView = new HTML_QuickForm(
+    $formEditView = new HTML_QuickForm2(
         'formEditView',
         'post',
         "?p=103",
@@ -188,14 +202,20 @@ try {
     /**
      * Layout
      */
-    $layouts = array();
-    $layouts[] = HTML_QuickForm::createElement('radio', 'layout', null, _("1 Column"), 'column_1');
-    $layouts[] = HTML_QuickForm::createElement('radio', 'layout', null, _("2 Columns"), 'column_2');
-    $layouts[] = HTML_QuickForm::createElement('radio', 'layout', null, _("3 Columns"), 'column_3');
-    $formEditView->addGroup($layouts, 'layout', _("Layout"), '&nbsp;');
-    $formEditView->setDefaults(array('layout[layout]' => 'column_1'));
+//    $layouts = array();
+//    $layouts[] = HTML_QuickForm2::createElement('radio', 'layout', null, _("1 Column"), 'column_1');
+//    $layouts[] = HTML_QuickForm2::createElement('radio', 'layout', null, _("2 Columns"), 'column_2');
+//    $layouts[] = HTML_QuickForm2::createElement('radio', 'layout', null, _("3 Columns"), 'column_3');
+//    $formEditView->addGroup($layouts, 'layout', _("Layout"), '&nbsp;');
+//    $formEditView->setDefaults(array('layout[layout]' => 'column_1'));
 
-    $formEditView->addElement('checkbox', 'public', '', _("Public"));
+    $layouts = $formAddView->addFieldset('layout')->setLabel(_("Layout"));
+    $layoutsGroup = $layouts->addGroup('name')->setLabel('Name:')->setSeparator(',&nbsp;');
+    $layoutsGroup->addRadio('layout', null, array(_("1 Column")), 'column_1');
+    $layoutsGroup->addRadio('layout', null, array(_("2 Columns")), 'column_2');
+    $layoutsGroup->addRadio('layout', null, array(_("3 Columns")), 'column_3');
+
+    $formEditView->addElement('checkbox', 'public', '', array(_("Public")));
     /**
      * Submit button
      */
@@ -203,21 +223,21 @@ try {
     $formEditView->addElement('reset', 'reset', _("Reset"), array("class" => "btc bt_default"));
     $formEditView->addElement('hidden', 'action');
     $formEditView->addElement('hidden', 'custom_view_id');
-    $formEditView->setDefaults(array('action' => 'edit'));
+    $formEditView->addDataSource(new HTML_QuickForm2_DataSource_Array(array('action' => 'edit')));
 
     /**
      * Renderer
      */
-    $rendererEditView = new HTML_QuickForm_Renderer_ArraySmarty($template, true);
+    $rendererEditView = new HTML_QuickForm2_Renderer_ArraySmarty($template, true);
     $rendererEditView->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $rendererEditView->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
-    $formEditView->accept($rendererEditView);
+    $formEditView->render($rendererEditView);
     $template->assign('formEditView', $rendererEditView->toArray());
 
     /**
      * Form share view
      */
-    $formShareView = new HTML_QuickForm(
+    $formShareView = new HTML_QuickForm2(
         'formShareView',
         'post',
         "?p=103",
@@ -236,14 +256,14 @@ try {
         'defaultDataset' => array()
     );
     $formShareView->addElement(
-        'select2',
+        'Select2',
         'unlocked_user_id',
         _("Unlocked users"),
         array(),
         $attrContacts
     );
     $formShareView->addElement(
-        'select2',
+        'Select2',
         'locked_user_id',
         _("Locked users"),
         array(),
@@ -261,14 +281,14 @@ try {
         'defaultDataset' => array()
     );
     $formShareView->addElement(
-        'select2',
+        'Select2',
         'unlocked_usergroup_id',
         _("Unlocked user groups"),
         array(),
         $attrContactgroups
     );
     $formShareView->addElement(
-        'select2',
+        'Select2',
         'locked_usergroup_id',
         _("Locked user groups"),
         array(),
@@ -291,19 +311,19 @@ try {
     $formShareView->addElement('submit', 'submit', _("Share"), array("class" => "btc bt_info"));
     $formShareView->addElement('reset', 'reset', _("Reset"), array("class" => "btc bt_default"));
     $formShareView->addElement('hidden', 'action');
-    $formShareView->setDefaults(array('action' => 'share'));
+    $formShareView->addDataSource(new HTML_QuickForm2_DataSource_Array(array('action' => 'share')));
     $formShareView->addElement('hidden', 'custom_view_id');
-    $rendererShareView = new HTML_QuickForm_Renderer_ArraySmarty($template, true);
+    $rendererShareView = new HTML_QuickForm2_Renderer_ArraySmarty($template, true);
     $rendererShareView->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $rendererShareView->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
-    $formShareView->accept($rendererShareView);
+    $formShareView->render($rendererShareView);
     $template->assign('formShareView', $rendererShareView->toArray());
 
     /**
      * Form add widget
      */
     $widgetObj = new CentreonWidget($centreon, $db);
-    $formAddWidget = new HTML_QuickForm(
+    $formAddWidget = new HTML_QuickForm2(
         'formAddWidget',
         'post',
         "?p=103",
@@ -315,7 +335,7 @@ try {
      * Name
      */
     $formAddWidget->addElement('text', 'widget_title', _("Title"), $attrsText);
-    $formAddWidget->addElement('select2', 'widget_model_id', _("Widget"), array(), $attrWidgets);
+    $formAddWidget->addElement('Select2', 'widget_model_id', array(_("Widget")), $attrWidgets);
 
     /**
      * Submit button
@@ -324,15 +344,15 @@ try {
     $formAddWidget->addElement('reset', 'reset', _("Reset"), array("class" => "btc bt_default"));
     $formAddWidget->addElement('hidden', 'action');
     $formAddWidget->addElement('hidden', 'custom_view_id');
-    $formAddWidget->setDefaults(array('action' => 'addWidget'));
+    $formAddWidget->addDataSource(new HTML_QuickForm2_DataSource_Array(array('action' => 'addWidget')));
 
     /**
      * Renderer
      */
-    $rendererAddWidget = new HTML_QuickForm_Renderer_ArraySmarty($template, true);
+    $rendererAddWidget = new HTML_QuickForm2_Renderer_ArraySmarty($template, true);
     $rendererAddWidget->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $rendererAddWidget->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
-    $formAddWidget->accept($rendererAddWidget);
+    $formAddWidget->render($rendererAddWidget);
     $template->assign('formAddWidget', $rendererAddWidget->toArray());
     $template->assign('rotationTimer', $rotationTimer);
 

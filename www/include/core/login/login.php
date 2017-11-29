@@ -38,8 +38,8 @@ require_once $centreon_path . "/bootstrap.php";
 /*
  * Adding requirements
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 /**
  * Path to the configuration dir
@@ -55,9 +55,13 @@ $release = $DBRESULT->fetchRow();
 /**
  * Defining Login Form
  */
-$form = new HTML_QuickForm('Form', 'post', './index.php');
-$form->addElement('text', 'useralias', _("Login:"), array('class' => 'inputclassic'));
-$form->addElement('password', 'password', _("Password"), array('class' => 'inputclassicPass'));
+$form = new HTML_QuickForm2('Form', 'post', './index.php');
+$useralias = $form->addElement('text', 'useralias', _("Login:"), array('class' => 'inputclassic'));
+$useralias->addRule('required', _("You must specify a username"));
+$useralias->setLabel(_("Login:"));
+$password = $form->addElement('password', 'password', _("Password"), array('class' => 'inputclassicPass'));
+$password->addRule('required', _("You must specify a password"));
+$password->setLabel(_("Password"));
 $submitLogin = $form->addElement('submit', 'submitLogin', _("Connect"), array('class' => 'btc bt_info'));
 
 $loginValidate = $form->validate();
@@ -97,8 +101,11 @@ if (isset($_GET['p'])) {
 /**
  * Adding validation rule
  */
-$form->addRule('useralias', _("You must specify a username"), 'required');
-$form->addRule('password', _("You must specify a password"), 'required');
+
+//$username->addRule('minlength', 'Username should be at least 5 symbols long', 5,
+//    HTML_QuickForm2_Rule::CLIENT_SERVER);
+
+
 
 /**
  * Form parameters
@@ -114,7 +121,7 @@ if ($file_install_acces) {
  * Smarty template Init
  */
 $tpl = new Smarty();
-$tpl = initSmartyTpl($path . '/include/core/login/template/', $tpl);
+$tpl->setTemplateDir(__DIR__ . '/template/');
 
 // Initializing variables
 $tpl->assign('loginMessages', $loginMessages);
@@ -131,13 +138,30 @@ $redirect = filter_input(
 $tpl->assign('redirect', $redirect);
 
 // Applying and Displaying template
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl, true);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl, true);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
-$form->accept($renderer);
-$tpl->assign('form', $renderer->toArray());
+$form->render($renderer);
+
+// Change the keys of the array elements to identifier values
+$newArray = $renderer->toArray();
+$result = array();
+array_walk($newArray['elements'], function ($value) use (&$result) {
+    $result[$value['id']] = $value;
+});
+$newArray['elements'] = $result;
+
+// Set array hidden to string
+$newArray['hidden'] = implode(',', $newArray['hidden']);
+
+$tpl->assign('form', $newArray);
+
+//echo '<pre>';
+//var_dump($newArray);
+//die();
 
 /*
  * Display login Page
  */
+
 $tpl->display("login.ihtml");

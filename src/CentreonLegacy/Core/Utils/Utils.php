@@ -200,13 +200,13 @@ class Utils
         $encodePassword = '';
         switch ($algo) {
             case 'md5' :
-                $encodePassword .= 'md5__' . md5($password);
+                $encodePassword .= 'md5__' . md5($password['password']);
                 break;
             case 'sha1' :
-                $encodePassword .= 'sha1__' . sha1($password);
+                $encodePassword .= 'sha1__' . sha1($password['password']);
                 break;
             default :
-                $encodePassword .= 'md5__' . md5($password);
+                $encodePassword .= 'md5__' . md5($password['password']);
                 break;
         }
         return $encodePassword;

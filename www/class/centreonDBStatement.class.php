@@ -48,10 +48,10 @@ class CentreonDBStatement extends \PDOStatement
         $this->fetchAll = null;
     }
 
-    public function fetch()
+    public function fetch($how = NULL, $orientation = NULL, $offset = NULL)
     {
         if (is_null($this->fetchAll)) {
-            return parent::fetch();
+            return parent::fetch($how, $orientation, $offset);
         } elseif (count($this->fetchAll) <= 0) {
             return false;
         } else {
@@ -59,9 +59,9 @@ class CentreonDBStatement extends \PDOStatement
         }
     }
 
-    public function fetchRow()
+    public function fetchRow($how = NULL, $orientation = NULL, $offset = NULL)
     {
-        return $this->fetch();
+        return $this->fetch($how, $orientation, $offset);
     }
 
     public function free()

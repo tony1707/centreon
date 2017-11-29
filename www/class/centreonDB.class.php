@@ -55,6 +55,8 @@ class CentreonDB extends \PDO
     protected $requestSuccessful;
     protected $lineRead;
     protected $debug;
+    protected $queryNumber;
+    protected $successQueryNumber;
 
     /**
      * Constructor

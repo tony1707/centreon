@@ -169,9 +169,9 @@ class CentreonHomeCustomview extends CentreonWebService
         require_once _CENTREON_PATH_ . "www/class/centreonWidget/Params/Sort.class.php";
         require_once _CENTREON_PATH_ . "www/class/centreonWidget/Params/Date.class.php";
         require_once __DIR__ . "/../../../GPL_LIB/Smarty/libs/Smarty.class.php";
-        require_once __DIR__ . "/../../lib/HTML/QuickForm.php";
-        require_once __DIR__ . "/../../lib/HTML/QuickForm/advmultiselect.php";
-        require_once __DIR__ . "/../../lib/HTML/QuickForm/Renderer/ArraySmarty.php";
+        require_once __DIR__ . "/../../lib/HTML/QuickForm2.php";
+        require_once __DIR__."/../../lib/HTML/QuickForm2/advmultiselect.php";
+        require_once __DIR__."/../../lib/HTML/QuickForm2/Renderer/ArraySmarty.php";
 
         global $centreon;
 
@@ -212,7 +212,7 @@ class CentreonHomeCustomview extends CentreonWebService
         $tpl->compile_check = true;
         $tpl->force_compile = true;
 
-        $form = new HTML_QuickForm('Form', 'post', "?p=103");
+        $form = new HTML_QuickForm2('Form', 'post', "?p=103");
         $form->addElement('header', 'title', $title);
         $form->addElement('header', 'information', _("General Information"));
 
@@ -293,7 +293,7 @@ class CentreonHomeCustomview extends CentreonWebService
         /*
          * Apply a template definition
          */
-        $renderer = new HTML_QuickForm_Renderer_ArraySmarty($template, true);
+        $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($template, true);
         $renderer->setRequiredTemplate('{$label}&nbsp;<i class="red">*</i>');
         $renderer->setErrorTemplate('<i class="red">{$error}</i><br />{$html}');
         $form->accept($renderer);
