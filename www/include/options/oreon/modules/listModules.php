@@ -66,5 +66,5 @@ $tpl->assign("modules", $modules);
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $tpl->display("listModules.ihtml");

@@ -93,7 +93,7 @@ if ($search) {
 }
 $res = $pearDB->query($rq);
 
-$form = new HTML_QuickForm('form', 'POST', "?p=".$p);
+$form = new HTML_QuickForm2('form', 'POST', "?p=".$p);
 
 /*
  * Fill a tab with a mutlidimensionnal Array we put in $tpl
@@ -210,7 +210,7 @@ $tpl->assign('session_id', session_id());
 $tpl->assign('syncDir', _("Synchronize Media Directory"));
 $tpl->assign('searchM', $search);
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("listImg.ihtml");

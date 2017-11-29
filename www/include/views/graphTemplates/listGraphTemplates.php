@@ -72,7 +72,7 @@ $rq = "SELECT graph_id, name, default_tpl1, vertical_label, base, split_componen
     "FROM giv_graphs_template gg $SearchTool ORDER BY name LIMIT " . $num * $limit . ", " . $limit;
 $res = $pearDB->query($rq);
 
-$form = new HTML_QuickForm('select_form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'POST', "?p=" . $p);
 /*
  * Different style between each lines
  */
@@ -172,7 +172,7 @@ $tpl->assign('searchGT', $search);
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("listGraphTemplates.ihtml");

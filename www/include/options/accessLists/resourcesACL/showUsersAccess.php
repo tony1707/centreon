@@ -105,7 +105,7 @@ $formData = array('contact' => $contact_id);
 /*
  * Create select form
  */
-$form = new HTML_QuickForm('select_form', 'GET', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'GET', "?p=" . $p);
 
 $form->addElement(
     'select',
@@ -153,7 +153,7 @@ $tpl->assign("elemArr", $elemArr);
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->assign('msg', _("The selected user didn't see any resources"));

@@ -46,8 +46,8 @@ $path = "./include/views/graphs/";
  * Include Pear Lib
  */
 
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 /*
  * Smarty template Init
@@ -99,7 +99,7 @@ if (isset($_REQUEST['end']) && is_numeric($_REQUEST['end'])) {
 /*
  * Form begin
  */
-$form = new HTML_QuickForm('FormPeriod', 'get', "?p=".$p);
+$form = new HTML_QuickForm2('FormPeriod', 'get', "?p=".$p);
 
 $periods = array(
     "" => "",
@@ -184,7 +184,7 @@ if ($period_start != 'undefined' && $period_end != 'undefined') {
     ));
 }
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 
 $tpl->assign('form', $renderer->toArray());

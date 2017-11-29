@@ -59,8 +59,8 @@ if ($name !== null) {
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 /*
  * Path to the options dir

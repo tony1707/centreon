@@ -183,7 +183,7 @@ $eTemplate = '<table>'
 #
 ## Form begin
 #
-$form = new HTML_QuickForm('Form', 'post', "?p=".$p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=".$p);
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add an ACL"));
 } elseif ($o == "c") {
@@ -199,14 +199,14 @@ $form->addElement('header', 'information', _("General Information"));
 $form->addElement('text', 'lca_name', _("ACL Definition"), $attrsText);
 $form->addElement('text', 'lca_alias', _("Alias"), $attrsText);
 /*	$tab = array();
-$tab[] = HTML_QuickForm::createElement('radio', 'lca_type', null, _("Menu"), '1');
-$tab[] = HTML_QuickForm::createElement('radio', 'lca_type', null, _("Resources"), '2');
-$tab[] = HTML_QuickForm::createElement('radio', 'lca_type', null, _("Both"), '3');
+$tab[] = HTML_QuickForm2::createElement('radio', 'lca_type', null, _("Menu"), '1');
+$tab[] = HTML_QuickForm2::createElement('radio', 'lca_type', null, _("Resources"), '2');
+$tab[] = HTML_QuickForm2::createElement('radio', 'lca_type', null, _("Both"), '3');
 $form->addGroup($tab, 'lca_type', _("Type"), '&nbsp;');
 $form->setDefaults(array('lca_type' => '3')); */
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('radio', 'lca_activate', null, _("Enabled"), '1');
-$tab[] = HTML_QuickForm::createElement('radio', 'lca_activate', null, _("Disabled"), '0');
+$tab[] = HTML_QuickForm2::createElement('radio', 'lca_activate', null, _("Enabled"), '1');
+$tab[] = HTML_QuickForm2::createElement('radio', 'lca_activate', null, _("Disabled"), '0');
 $form->addGroup($tab, 'lca_activate', _("Status"), '&nbsp;');
 $form->setDefaults(array('lca_activate' => '1'));
 
@@ -251,8 +251,8 @@ $ams1->setButtonAttributes('remove', array('value' => _("Remove"), "class" => "b
 $ams1->setElementTemplate($eTemplate);
 echo $ams1->getElementJs(false);
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('radio', 'lca_hg_childs', null, _("Yes"), '1');
-$tab[] = HTML_QuickForm::createElement('radio', 'lca_hg_childs', null, _("No"), '0');
+$tab[] = HTML_QuickForm2::createElement('radio', 'lca_hg_childs', null, _("Yes"), '1');
+$tab[] = HTML_QuickForm2::createElement('radio', 'lca_hg_childs', null, _("No"), '0');
 $form->addGroup($tab, 'lca_hg_childs', _("Include Host Groups -> Hosts"), '&nbsp;');
 $form->setDefaults(array('lca_hg_childs' => '1'));
 
@@ -304,7 +304,7 @@ while ($topo1 = $DBRESULT1->fetchRow()) {
     $lca_topos2[$a]["childs"] = array();
 
     /*old*/
-    $lca_topos[] = HTML_QuickForm::createElement(
+    $lca_topos[] = HTML_QuickForm2::createElement(
         'checkbox',
         $topo1["topology_id"],
         null,
@@ -333,7 +333,7 @@ while ($topo1 = $DBRESULT1->fetchRow()) {
 
 
         /*old*/
-        $lca_topos[] = HTML_QuickForm::createElement(
+        $lca_topos[] = HTML_QuickForm2::createElement(
             'checkbox',
             $topo2["topology_id"],
             null,
@@ -362,7 +362,7 @@ while ($topo1 = $DBRESULT1->fetchRow()) {
 
 
             /*old*/
-            $lca_topos[] = HTML_QuickForm::createElement(
+            $lca_topos[] = HTML_QuickForm2::createElement(
                 'checkbox',
                 $topo3["topology_id"],
                 null,
@@ -388,7 +388,7 @@ while ($topo1 = $DBRESULT1->fetchRow()) {
                 $lca_topos2[$a]["childs"][$b]["childs"][$c]["childs"][$d]["childs"] = array();
                 
                 /*old*/
-                $lca_topos[] = HTML_QuickForm::createElement(
+                $lca_topos[] = HTML_QuickForm2::createElement(
                     'checkbox',
                     $topo4["topology_id"],
                     null,
@@ -414,8 +414,8 @@ if ($o == "a") {
 $form->addGroup($lca_topos, 'lca_topos', _("Visible page"), '&nbsp;&nbsp;');
 
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('radio', 'action', null, _("List"), '1');
-$tab[] = HTML_QuickForm::createElement('radio', 'action', null, _("Form"), '0');
+$tab[] = HTML_QuickForm2::createElement('radio', 'action', null, _("List"), '1');
+$tab[] = HTML_QuickForm2::createElement('radio', 'action', null, _("Form"), '0');
 $form->addGroup($tab, 'action', _("More Actions"), '&nbsp;');
 $form->setDefaults(array('action'=>'1'));
 
@@ -491,7 +491,7 @@ if ($valid && $action["action"]) {
     require_once("listLCA.php");
 } else {
     #Apply a template definition
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl, true);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl, true);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

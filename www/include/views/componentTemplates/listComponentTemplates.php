@@ -87,7 +87,7 @@ $query = "( SELECT compo_id, NULL as host_name, host_id, service_id, name, ds_st
     "ORDER BY host_name, name LIMIT " . $num * $limit . ", " . $limit;
 $DBRESULT = $pearDB->query($query);
 
-$form = new HTML_QuickForm('select_form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'POST', "?p=" . $p);
 
 /*
  * Different style between each lines
@@ -202,7 +202,7 @@ $tpl->assign('searchCurve', $search);
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("listComponentTemplates.ihtml");

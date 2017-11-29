@@ -63,7 +63,7 @@ isset($_POST["search"]) ? $search = $_POST["search"] : "";
  *
  */
 
-$form = new HTML_QuickForm('formItem', 'post', "?p=".$p);
+$form = new HTML_QuickForm2('formItem', 'post', "?p=".$p);
 
 $items = getAllHostgroupsForReporting($is_admin, $lcaHostGroupstr, $search);
 $select = $form->addElement('select', 'item', _("Host Group"), $items, array("onChange" =>"this.form.submit();"));
@@ -143,11 +143,11 @@ $tpl->assign('resumeTitle', _("Hosts group state"));
 /*
  * Rendering Forms
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $formPeriod->accept($renderer);
 $tpl->assign('formPeriod', $renderer->toArray());
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('formItem', $renderer->toArray());
 

@@ -70,7 +70,7 @@ if (file_exists($moduleInfoObj->getModulePath() . "/infos/infos.txt")) {
     $tpl->assign("module_infosTxt", false);
 }
 
-$form1 = new HTML_QuickForm('Form', 'post', "?p=".$p);
+$form1 = new HTML_QuickForm2('Form', 'post', "?p=".$p);
 
 if ($form1->validate()) {
     $moduleInstaller = $moduleFactory->newInstaller($name);
@@ -96,7 +96,7 @@ if ($form1->validate()) {
 $form1->addElement('submit', 'list', _("Back"), array("class" => "btc bt_default"));
 $hid_name = $form1->addElement('hidden', 'name');
 $hid_name->setValue($name);
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form1->accept($renderer);
 $tpl->assign('form1', $renderer->toArray());
 

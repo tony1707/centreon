@@ -71,7 +71,7 @@ $attrsTextarea = array("rows" => "3", "cols" => "30");
 #
 ## Form begin
 #
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 if ($o == "a") {
     $form->addElement('header', 'ftitle', _("Add a Graph Template"));
 } elseif ($o == "c") {
@@ -263,7 +263,7 @@ if ($valid) {
     require_once("listGraphTemplates.php");
 } else {
     // Apply a template definition
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl, true);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl, true);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

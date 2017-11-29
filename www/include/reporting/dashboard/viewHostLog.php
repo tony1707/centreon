@@ -59,7 +59,7 @@ isset($_POST["host"]) ? $id = $_POST["host"] : htmlentities($id, ENT_QUOTES, "UT
 /*
  * Host Selection
  */
-$formHost = new HTML_QuickForm('formHost', 'post', "?p=".$p);
+$formHost = new HTML_QuickForm2('formHost', 'post', "?p=".$p);
 $redirect = $formHost->addElement('hidden', 'o');
 $redirect->setValue($o);
 
@@ -130,11 +130,11 @@ $tpl->assign("resumeTitle", _("Host state"));
 /*
  * Rendering Forms
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $formPeriod->accept($renderer);
 $tpl->assign('formPeriod', $renderer->toArray());
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $formHost->accept($renderer);
 $tpl->assign('formHost', $renderer->toArray());
 

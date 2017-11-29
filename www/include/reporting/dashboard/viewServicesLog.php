@@ -53,7 +53,7 @@ isset($_POST["item"]) ? $service_id = $_POST["item"] : $service_id;
 /*
  * FORMS
  */
-$form = new HTML_QuickForm('formItem', 'post', "?p=".$p);
+$form = new HTML_QuickForm2('formItem', 'post', "?p=".$p);
 
 $host_name = getMyHostName($host_id);
 $items = $centreon->user->access->getHostServices($pearDBO, $host_id);
@@ -130,11 +130,11 @@ $tpl->assign('p', $p);
 /*
  * Rendering forms
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $formPeriod->accept($renderer);
 $tpl->assign('formPeriod', $renderer->toArray());
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('formItem', $renderer->toArray());
 

@@ -41,8 +41,8 @@ $path = "./include/options/accessLists/reloadACL/";
 
 require_once "./include/common/common-Func.php";
 require_once "./class/centreonMsg.class.php";
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 session_start();
 session_write_close();
@@ -92,7 +92,7 @@ $tpl = initSmartyTpl($path, $tpl);
 $res = $pearDB->query("SELECT DISTINCT * FROM session");
 $session_data = array();
 $cpt = 0;
-$form = new HTML_QuickForm('select_form', 'POST', "?p=".$p);
+$form = new HTML_QuickForm2('select_form', 'POST', "?p=".$p);
 
 while ($r = $res->fetchRow()) {
     $resUser = $pearDB->query("SELECT contact_name, contact_admin FROM contact WHERE contact_id = '".$r["user_id"]."'");
@@ -145,7 +145,7 @@ foreach (array('o1', 'o2') as $option) {
     $o1->setValue(null);
 }
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->assign('p', $p);

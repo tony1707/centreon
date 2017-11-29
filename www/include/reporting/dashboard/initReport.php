@@ -42,8 +42,8 @@ $path = "./include/reporting/dashboard";
 /*
  * Required Pear Lib
  */
-require_once "HTML/QuickForm.php";
-require_once "HTML/QuickForm/Renderer/ArraySmarty.php";
+require_once "HTML/QuickForm2.php";
+require_once "HTML/QuickForm2/Renderer/ArraySmarty.php";
 
 /*
  * Require Centreon Class
@@ -66,7 +66,7 @@ $pearDBO = new CentreonDB("centstorage");
 $debug = 0;
 
 /*
- * QuickForm templates
+ * QuickForm2 templates
  */
 $attrsTextI        = array("size"=>"3");
 $attrsText        = array("size"=>"30");
@@ -263,7 +263,7 @@ $tpl->assign('period_choice', $period_choice);
 /*
  * Period Selection form
  */
-$formPeriod = new HTML_QuickForm('FormPeriod', 'post', "?p=".$p);
+$formPeriod = new HTML_QuickForm2('FormPeriod', 'post', "?p=".$p);
 $formPeriod->addElement('select', 'period', "", $periodList, array("id" => "presetPeriod"));
 $formPeriod->addElement('hidden', 'timeline', "1");
 $formPeriod->addElement(

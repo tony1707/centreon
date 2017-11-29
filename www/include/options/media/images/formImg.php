@@ -82,7 +82,7 @@ $attrsTextarea = array("rows" => "5", "cols" => "80");
 /*
  * Form begin
  */
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add Image(s)"));
     $form->addElement(
@@ -153,8 +153,8 @@ $form->addElement(
 $form->addElement('textarea', 'img_comment', _("Comments"), $attrsTextarea);
 
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('radio', 'action', null, _("Return to list"), '1');
-$tab[] = HTML_QuickForm::createElement('radio', 'action', null, _("Review form after save"), '0');
+$tab[] = HTML_QuickForm2::createElement('radio', 'action', null, _("Return to list"), '1');
+$tab[] = HTML_QuickForm2::createElement('radio', 'action', null, _("Review form after save"), '0');
 $form->addGroup($tab, 'action', _("Action"), '&nbsp;');
 $form->setDefaults(array('action' => '1'));
 
@@ -225,7 +225,7 @@ if ($valid) {
     /*
      * Apply a template definition
      */
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);
