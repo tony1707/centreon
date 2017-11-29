@@ -106,10 +106,10 @@ $tpl = initSmartyTpl('./include/monitoring/downtime/', $tpl, "template/");
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
-$form = new HTML_QuickForm('select_form', 'GET', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'GET', "?p=" . $p);
 
 $tab_downtime_svc = array();
 
@@ -300,7 +300,7 @@ $tpl->assign('view_downtime_cycle', $view_downtime_cycle);
 $tpl->assign('search_author', $search_author);
 
 /* Send Form */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 

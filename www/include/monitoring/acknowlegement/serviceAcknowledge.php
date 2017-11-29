@@ -37,8 +37,8 @@ if (!isset($centreon)) {
     exit();
 }
 
-require_once "HTML/QuickForm.php";
-require_once "HTML/QuickForm/Renderer/ArraySmarty.php";
+require_once "HTML/QuickForm2.php";
+require_once "HTML/QuickForm2/Renderer/ArraySmarty.php";
 require_once "./include/monitoring/common-Func.php";
 require_once "./class/centreonDB.class.php";
 
@@ -67,7 +67,7 @@ if (!$is_admin) {
  */
 if ($is_admin || (isset($lcaHostByName["LcaHost"][$host_name]))) {
     ## Form begin
-    $form = new HTML_QuickForm('select_form', 'POST', "?p=".$p."&host_name=".urlencode($host_name)."&service_description=".urlencode($service_description));
+    $form = new HTML_QuickForm2('select_form', 'POST', "?p=".$p."&host_name=".urlencode($host_name)."&service_description=".urlencode($service_description));
     $form->addElement('header', 'title', _("Acknowledge a Service"));
 
     $tpl->assign('hostlabel', _("Host Name"));
@@ -117,7 +117,7 @@ if ($is_admin || (isset($lcaHostByName["LcaHost"][$host_name]))) {
     $form->addElement('submit', 'submit', ($en == 1) ? _("Add") : _("Delete"));
     $form->addElement('reset', 'reset', _("Reset"));
 
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 

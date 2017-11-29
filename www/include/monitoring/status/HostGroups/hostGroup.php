@@ -69,7 +69,7 @@ $tpl->assign("mon_duration", _("Duration"));
 $tpl->assign("mon_status_information", _("Status information"));
 $tpl->assign('poller_listing', $centreon->user->access->checkAction('poller_listing'));
 
-$form = new HTML_QuickForm('select_form', 'GET', "?p=".$p);
+$form = new HTML_QuickForm2('select_form', 'GET', "?p=".$p);
 
 $tpl->assign("order", strtolower($order));
 $tab_order = array("sort_asc" => "sort_desc", "sort_desc" => "sort_asc");
@@ -80,7 +80,7 @@ if (isset($_GET['searchHG'])) {
     $tpl->assign('searchHG', $_GET['searchHG']);
 }
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 
 $tpl->assign('form', $renderer->toArray());

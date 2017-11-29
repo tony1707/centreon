@@ -47,11 +47,11 @@ if (!isset($oreon)) {
     /*
 	 * Pear library
 	 */
-    require_once "HTML/QuickForm.php";
-    require_once 'HTML/QuickForm/advmultiselect.php';
-    require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+    require_once "HTML/QuickForm2.php";
+    require_once 'HTML/QuickForm2/advmultiselect.php';
+    require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
-    $form = new HTML_QuickForm('Form', 'post', "?p=".$p);
+    $form = new HTML_QuickForm2('Form', 'post', "?p=".$p);
 
     /*
 	 * Path to the configuration dir

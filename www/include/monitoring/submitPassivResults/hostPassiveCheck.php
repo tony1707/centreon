@@ -64,11 +64,11 @@ if (!$is_admin) {
 $hostTab = array();
 
 if ($is_admin || ($flag_acl && !$is_admin)) {
-    require_once "HTML/QuickForm.php";
-    require_once 'HTML/QuickForm/advmultiselect.php';
-    require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+    require_once "HTML/QuickForm2.php";
+    require_once 'HTML/QuickForm2/advmultiselect.php';
+    require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
-    $form = new HTML_QuickForm('select_form', 'GET', "?p=".$p);
+    $form = new HTML_QuickForm2('select_form', 'GET', "?p=".$p);
     $form->addElement('header', 'title', _("Command Options"));
 
     $hosts = array($host_name=>$host_name);
@@ -95,7 +95,7 @@ if ($is_admin || ($flag_acl && !$is_admin)) {
     $tpl = initSmartyTpl($path, $tpl);
 
     #Apply a template definition
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

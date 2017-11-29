@@ -66,7 +66,7 @@ if (!$centreon->user->access->checkAction("service_comment")) {
     /*
      * Form begin
      */
-    $form = new HTML_QuickForm('Form', 'POST', "?p=" . $p);
+    $form = new HTML_QuickForm2('Form', 'POST', "?p=" . $p);
 
     /*
      * Indicator basic information
@@ -82,7 +82,7 @@ if (!$centreon->user->access->checkAction("service_comment")) {
         $host_name = $hObj->getHostName($_GET['host_id']);
     }
     if (!isset($_GET['host_id'])) {
-        $dtType[] = HTML_QuickForm::createElement(
+        $dtType[] = HTML_QuickForm2::createElement(
             'radio',
             'commentType',
             null,
@@ -90,7 +90,7 @@ if (!$centreon->user->access->checkAction("service_comment")) {
             '1',
             array('id' => 'host', 'onclick' => "toggleParams('host');")
         );
-        $dtType[] = HTML_QuickForm::createElement(
+        $dtType[] = HTML_QuickForm2::createElement(
             'radio',
             'commentType',
             null,
@@ -215,7 +215,7 @@ if (!$centreon->user->access->checkAction("service_comment")) {
         /*
          * Apply a template definition
          */
-        $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+        $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
         $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
         $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
         $form->accept($renderer);

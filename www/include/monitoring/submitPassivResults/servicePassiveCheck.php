@@ -90,10 +90,10 @@ if (!$is_admin && $host_id) {
 
 if (($is_admin || $flag_acl) && $host_id) {
     #Pear library
-    require_once "HTML/QuickForm.php";
-    require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+    require_once "HTML/QuickForm2.php";
+    require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
-    $form = new HTML_QuickForm('select_form', 'GET', "?p=".$p);
+    $form = new HTML_QuickForm2('select_form', 'GET', "?p=".$p);
     $form->addElement('header', 'title', _("Command Options"));
 
     $return_code = array("0" => "OK","1" => "WARNING", "3" => "UNKNOWN", "2" => "CRITICAL");
@@ -116,7 +116,7 @@ if (($is_admin || $flag_acl) && $host_id) {
     $tpl = initSmartyTpl($path, $tpl);
 
     #Apply a template definition
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

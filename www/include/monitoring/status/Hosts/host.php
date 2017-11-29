@@ -211,7 +211,7 @@ if (!isset($_GET['o'])) {
 
 $sDefaultOrder = "0";
 
-$form = new HTML_QuickForm('select_form', 'GET', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'GET', "?p=" . $p);
 
 $form->addElement('select', 'statusHost', _('Host Status'), $aStatusHost, array('id' => 'statusHost', 'onChange' => "statusHosts(this.value);"));
 
@@ -351,7 +351,7 @@ $tpl->assign('poller_listing', $centreon->user->access->checkAction('poller_list
 $tpl->assign('hgStr', _('Hostgroup'));
 $criticality = new CentreonCriticality($pearDB);
 $tpl->assign('criticalityUsed', count($criticality->getList()));
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("host.ihtml");

@@ -98,7 +98,7 @@ if (isset($_GET["host_search"])) {
         $tpl->assign('poller_listing', $oreon->user->access->checkAction('poller_listing'));
         $tpl->assign('hgStr', _('Hostgroup'));
 
-        $form = new HTML_QuickForm('select_form', 'GET', "?p=".$p);
+        $form = new HTML_QuickForm2('select_form', 'GET', "?p=".$p);
         
         $form->addElement('select', 'typeDisplay', _('Display'), $aTypeAffichageLevel1, array('id' => 'typeDisplay', 'onChange' => "displayingLevel1(this.value);"));
         $form->addElement('select', 'typeDisplay2', _('Display '), $aTypeAffichageLevel2, array('id' => 'typeDisplay2', 'onChange' => "displayingLevel2(this.value);"));
@@ -138,7 +138,7 @@ if (isset($_GET["host_search"])) {
 
     $tpl->assign('limit', $limit);
 
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $form->accept($renderer);
 
     $tpl->assign('form', $renderer->toArray());

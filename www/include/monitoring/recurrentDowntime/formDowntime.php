@@ -42,7 +42,7 @@ if (!isset($centreon)) {
 
 
 /*
- * QuickForm Rules
+ * QuickForm2 Rules
  */
 function testDowntimeNameExistence($downtimeName = null)
 {
@@ -115,7 +115,7 @@ $attrServicegroups = array(
 /*
  * Init QuickFrom
  */
-$form = new HTML_QuickForm('form_dt', 'post', "?p=$p");
+$form = new HTML_QuickForm2('form_dt', 'post', "?p=$p");
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add a downtime"));
 } elseif ($o == "c") {
@@ -135,8 +135,8 @@ $form->addElement('header', 'linkManagement', _("Links Management"));
 $form->addElement('text', 'downtime_name', _("Name"), $attrsText);
 $form->addElement('text', 'downtime_description', _("Alias"), $attrsTextLong);
 
-$donwtime_activate[] = HTML_QuickForm::createElement('radio', 'downtime_activate', null, _("Yes"), '1');
-$donwtime_activate[] = HTML_QuickForm::createElement('radio', 'downtime_activate', null, _("No"), '0');
+$donwtime_activate[] = HTML_QuickForm2::createElement('radio', 'downtime_activate', null, _("Yes"), '1');
+$donwtime_activate[] = HTML_QuickForm2::createElement('radio', 'downtime_activate', null, _("No"), '0');
 $form->addGroup($donwtime_activate, 'downtime_activate', _("Enable"), '&nbsp;');
 $form->setDefaults(array('downtime_activate' => '1'));
 
@@ -371,7 +371,7 @@ if ($form->validate()) {
     }
 }
 if (!$valid) {
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl, true);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl, true);
     $renderer->setRequiredTemplate('{$label}&nbsp;<i class="red">*</i>');
     $renderer->setErrorTemplate('<i class="red">{$error}</i><br />{$html}');
     if ($o == 'w') {

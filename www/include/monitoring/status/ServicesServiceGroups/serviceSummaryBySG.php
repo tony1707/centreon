@@ -125,7 +125,7 @@ if (isset($_GET["host_search"])) {
         $tpl->assign("sgSearchSelect", $sgSearchSelect);
 
 
-        $form = new HTML_QuickForm('select_form', 'GET', "?p=".$p);
+        $form = new HTML_QuickForm2('select_form', 'GET', "?p=".$p);
 
         $tpl->assign("order", strtolower($order));
         $tab_order = array("sort_asc" => "sort_desc", "sort_desc" => "sort_asc");
@@ -217,7 +217,7 @@ if (isset($_GET["host_search"])) {
     $o2->setSelected(null);
     $tpl->assign('limit', $limit);
 
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $form->accept($renderer);
 
     $tpl->assign('form', $renderer->toArray());

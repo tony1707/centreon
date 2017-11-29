@@ -92,11 +92,11 @@ include_once("./class/centreonDB.class.php");
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/advmultiselect.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/advmultiselect.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
-$form = new HTML_QuickForm('select_form', 'GET', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'GET', "?p=" . $p);
 
 $tab_comments_svc = array();
 
@@ -202,7 +202,7 @@ $tpl->assign("search_output", $search_output);
 $tpl->assign('search_host', $host_name);
 $tpl->assign('search_service', $search_service);
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('limit', $limit);
 $tpl->assign('form', $renderer->toArray());

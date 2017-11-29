@@ -55,9 +55,9 @@ include_once("./class/centreonDB.class.php");
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/advmultiselect.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/advmultiselect.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 if (!isset($_GET["cmd"]) && isset($_POST["cmd"])) {
     $param = $_POST;

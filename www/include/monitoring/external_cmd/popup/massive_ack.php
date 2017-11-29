@@ -60,8 +60,8 @@ $tpl = initSmartyTplForPopup($path, $tpl, './templates/', _CENTREON_PATH_);
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 require_once _CENTREON_PATH_ . "www/include/monitoring/common-Func.php";
 
 /*
@@ -91,7 +91,7 @@ $persistent = $user_params["ack_persistent"];
 $force_check = $user_params["force_check"];
 $ack_services = $user_params["ack_services"];
 */
-$form = new HTML_QuickForm('select_form', 'GET', 'main.php');
+$form = new HTML_QuickForm2('select_form', 'GET', 'main.php');
 
 $form->addElement('header', 'title', _("Acknowledge problems"));
 
@@ -145,7 +145,7 @@ $form->addElement(
 );
 $form->addElement('reset', 'reset', _("Reset"), array("class" => "btc bt_default"));
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 

@@ -66,10 +66,10 @@ $tpl = initSmartyTplForPopup($path, $tpl, './templates/', _CENTREON_PATH_);
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
-$form = new HTML_QuickForm('select_form', 'GET', 'main.php');
+$form = new HTML_QuickForm2('select_form', 'GET', 'main.php');
 
 $form->addElement('header', 'title', _("Set downtimes"));
 
@@ -97,8 +97,8 @@ $form->setDefaults(
 );
 /*
 $host_or_centreon_time[] =
-HTML_QuickForm::createElement('radio', 'host_or_centreon_time', null, _("Centreon Time"), '0');
-$host_or_centreon_time[] = HTML_QuickForm::createElement('radio', 'host_or_centreon_time', null, _("Host Time"), '1');
+HTML_QuickForm2::createElement('radio', 'host_or_centreon_time', null, _("Centreon Time"), '0');
+$host_or_centreon_time[] = HTML_QuickForm2::createElement('radio', 'host_or_centreon_time', null, _("Host Time"), '1');
 $form->addGroup($host_or_centreon_time, 'host_or_centreon_time', _("Select Host or Centreon Time"), '&nbsp;');        
 $form->setDefaults(array('host_or_centreon_time' => '0'));   
 */
@@ -147,7 +147,7 @@ $form->addElement(
 );
 $form->addElement('reset', 'reset', _("Reset"), array("class" => "btc bt_default"));
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 

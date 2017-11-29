@@ -236,7 +236,7 @@ if (!isset($_GET['o'])) {
     $sSetOrderInMemory = "0";
 }
 
-$form = new HTML_QuickForm('select_form', 'GET', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'GET', "?p=" . $p);
 
 $tpl->assign("order", strtolower($order));
 $tab_order = array("sort_asc" => "sort_desc", "sort_desc" => "sort_asc");
@@ -440,7 +440,7 @@ $form->addElement(
 );
 $form->setDefaults(array('criticality' => isset($_SESSION['criticality_id']) ? $_SESSION['criticality_id'] : "0"));
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('hostStr', _('Host'));
 $tpl->assign('serviceStr', _('Service'));
