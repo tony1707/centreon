@@ -52,8 +52,8 @@ if (!isset($centreon)) {
 $centreonLang = new CentreonLang(_CENTREON_PATH_, $centreon);
 $centreonLang->bindLang();
 
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 if (!isset($pearDB) || is_null($pearDB)) {
     $pearDB = new CentreonDB();
@@ -89,7 +89,7 @@ $attrsAdvSelect = array("style" => "width: 200px; height: 100px;");
 $attrsTextarea = array("rows" => "5", "cols" => "40");
 
 /* Basic info */
-$form = new HTML_QuickForm('Form', 'post');
+$form = new HTML_QuickForm2('Form', 'post');
 $form->addElement('header', 'title', _("Macro Descriptions"));
 $form->addElement('header', 'information', _("Macros"));
 
@@ -127,7 +127,7 @@ $tpl->assign('nb_arg', $nb_arg);
 $tpl->assign('macros', $macros);
 $tpl->assign('noArgMsg', _("Sorry, your command line does not contain any \$_SERVICE\$ macro or \$_HOST\$ macro."));
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1"></font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 $form->accept($renderer);

@@ -90,7 +90,7 @@ $DBRESULT->closeCursor();
 $attrsText = array("size" => "35");
 $attrsTextarea = array("rows" => "9", "cols" => "80");
 
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 $form->addElement('header', 'title', _("View command definition"));
 
 /*
@@ -109,8 +109,8 @@ if ($cmd["command_type"] == "1") {
 }
 
 
-$cmdType[] = HTML_QuickForm::createElement('radio', 'command_type', null, _("Notification"), '1');
-$cmdType[] = HTML_QuickForm::createElement('radio', 'command_type', null, _("Check"), '2');
+$cmdType[] = HTML_QuickForm2::createElement('radio', 'command_type', null, _("Notification"), '1');
+$cmdType[] = HTML_QuickForm2::createElement('radio', 'command_type', null, _("Check"), '2');
 
 $v1 = $form->addGroup($cmdType, 'command_type', _("Command Type"), '&nbsp;&nbsp;');
 $v1->freeze();
@@ -151,7 +151,7 @@ $tpl = initSmartyTpl($path, $tpl);
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 

@@ -91,7 +91,7 @@ $rq = "SELECT DISTINCT msr.*
 $results = $pearDB->query($rq);
 $ar_relations = array();
 
-$form = new HTML_QuickForm('Form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'POST', "?p=" . $p);
 
 /*
 * Construct request
@@ -216,7 +216,7 @@ $tpl->assign('limit', $limit);
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("listMetric.ihtml");

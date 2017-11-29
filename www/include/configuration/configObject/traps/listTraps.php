@@ -112,7 +112,7 @@ if ($search) {
 
 
 $DBRESULT = $pearDB->query($rq);
-$form = new HTML_QuickForm('form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('form', 'POST', "?p=" . $p);
 
 /*
  * Different style between each lines
@@ -231,7 +231,7 @@ $tpl->assign('limit', $limit);
 $tpl->assign('searchT', $search);
 
 /* Apply a template definition */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("listTraps.ihtml");

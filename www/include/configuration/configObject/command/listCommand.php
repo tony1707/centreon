@@ -122,7 +122,7 @@ $search = tidySearchKey($search, $advanced_search);
 
 $DBRESULT = $pearDB->query($rq);
 
-$form = new HTML_QuickForm('form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('form', 'POST', "?p=" . $p);
 
 /*
  * Different style between each lines
@@ -241,7 +241,7 @@ foreach (array('o1', 'o2') as $option) {
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->assign('limit', $limit);

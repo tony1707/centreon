@@ -61,7 +61,7 @@ $attrsTextarea = array("rows" => "5", "cols" => "40");
 #
 ## Form begin
 #
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add Group"));
 } elseif ($o == "c") {
@@ -164,7 +164,7 @@ if ($valid) {
     require_once($path . "listGroups.php");
 } else {
     ##Apply a template definition
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

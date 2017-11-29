@@ -45,10 +45,10 @@ if (!isset($oreon)) {
 
 global $path;
 $path = "./include/configuration/configObject/escalation/";
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
-$form = new HTML_QuickForm('Form', 'post', "?p=".$p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=".$p);
 $tpl = new Smarty();
 $tpl = initSmartyTpl($path, $tpl);
 
@@ -124,7 +124,7 @@ $form->addElement(
 );
 $valid = false;
 #Apply a template definition
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 $form->accept($renderer);

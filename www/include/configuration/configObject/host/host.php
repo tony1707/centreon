@@ -52,9 +52,9 @@ $cG ? $dupNbr = $cG : $dupNbr = $cP;
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/select2.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Element/Select2.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 /*
  * Path to the configuration dir

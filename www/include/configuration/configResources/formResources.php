@@ -77,7 +77,7 @@ require_once _CENTREON_PATH_ . "www/class/centreonInstance.class.php";
 /**
  * Form
  */
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add a Resource"));
 } elseif ($o == "c") {
@@ -113,15 +113,15 @@ $form->addElement('select2', 'instance_id', _("Linked Instances"), array(), $att
  * Further information
  */
 $form->addElement('header', 'furtherInfos', _("Additional Information"));
-$rsActivation[] = HTML_QuickForm::createElement('radio', 'resource_activate', null, _("Enabled"), '1');
-$rsActivation[] = HTML_QuickForm::createElement('radio', 'resource_activate', null, _("Disabled"), '0');
+$rsActivation[] = HTML_QuickForm2::createElement('radio', 'resource_activate', null, _("Enabled"), '1');
+$rsActivation[] = HTML_QuickForm2::createElement('radio', 'resource_activate', null, _("Disabled"), '0');
 $form->addGroup($rsActivation, 'resource_activate', _("Status"), '&nbsp;');
 $form->setDefaults(array('resource_activate' => '1'));
 $form->addElement('textarea', 'resource_comment', _("Comment"), $attrsTextarea);
 
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('radio', 'action', null, _("List"), '1');
-$tab[] = HTML_QuickForm::createElement('radio', 'action', null, _("Form"), '0');
+$tab[] = HTML_QuickForm2::createElement('radio', 'action', null, _("List"), '1');
+$tab[] = HTML_QuickForm2::createElement('radio', 'action', null, _("Form"), '0');
 $form->addGroup($tab, 'action', _("Post Validation"), '&nbsp;');
 $form->setDefaults(array('action' => '1'));
 
@@ -201,7 +201,7 @@ if ($valid) {
     require_once($path . "listResources.php");
 } else {
     // Apply a template definition
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl, true);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl, true);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

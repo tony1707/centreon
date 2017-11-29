@@ -160,7 +160,7 @@ $attrsTextarea4 = array("rows" => "$nbRowMacro", "cols" => "100", "id" => "listO
 /*
  * Form begin
  */
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p . '&type=' . $type);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p . '&type=' . $type);
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add a Command"));
 } elseif ($o == "c") {
@@ -181,7 +181,7 @@ if (isset($tabCommandType[$type])) {
 $form->addElement('header', 'furtherInfos', _("Additional Information"));
 
 foreach ($tabCommandType as $id => $name) {
-    $cmdType[] = HTML_QuickForm::createElement(
+    $cmdType[] = HTML_QuickForm2::createElement(
         'radio',
         'command_type',
         null,
@@ -219,8 +219,8 @@ $form->addElement('textarea', 'command_comment', _("Comment"), $attrsTextarea2);
 $form->addElement('button', 'desc_macro', _("Describe macros"), array("onClick" => "manageMacros();"));
 $form->addElement('textarea', 'listOfMacros', _("Macros Descriptions"), $attrsTextarea4)->setAttribute("readonly");
 
-$cmdActivation[] = HTML_QuickForm::createElement('radio', 'command_activate', null, _("Enabled"), '1');
-$cmdActivation[] = HTML_QuickForm::createElement('radio', 'command_activate', null, _("Disabled"), '0');
+$cmdActivation[] = HTML_QuickForm2::createElement('radio', 'command_activate', null, _("Enabled"), '1');
+$cmdActivation[] = HTML_QuickForm2::createElement('radio', 'command_activate', null, _("Disabled"), '0');
 $form->addGroup($cmdActivation, 'command_activate', _("Status"), '&nbsp;');
 $form->setDefaults(array('command_activate' => '1'));
 
@@ -376,7 +376,7 @@ if ($valid) {
     /*
      * Apply a template definition
      */
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

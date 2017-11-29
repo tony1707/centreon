@@ -44,9 +44,9 @@ require_once $path . "DB-Func.php";
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/select2.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Element/Select2.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 $connectorObj = new CentreonConnector($pearDB);
 

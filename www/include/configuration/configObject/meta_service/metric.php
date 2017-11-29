@@ -119,7 +119,7 @@ $attrsTextarea = array("rows" => "5", "cols" => "40");
 /*
  * Form begin
  */
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 if ($o == "as") {
     $form->addElement('header', 'title', _("Add a Meta Service indicator"));
 } elseif ($o == "cs") {
@@ -143,15 +143,15 @@ $sel = $form->addElement('hierselect', 'metric_sel', _("Service"));
 $sel->setOptions(array($services1, $services2));
 
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('radio', 'activate', null, _("Enabled"), '1');
-$tab[] = HTML_QuickForm::createElement('radio', 'activate', null, _("Disabled"), '0');
+$tab[] = HTML_QuickForm2::createElement('radio', 'activate', null, _("Enabled"), '1');
+$tab[] = HTML_QuickForm2::createElement('radio', 'activate', null, _("Disabled"), '0');
 $form->addGroup($tab, 'activate', _("Status"), '&nbsp;');
 $form->setDefaults(array('activate' => '1'));
 $form->addElement('textarea', 'msr_comment', _("Comments"), $attrsTextarea);
 
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('radio', 'action', null, _("List"), '1');
-$tab[] = HTML_QuickForm::createElement('radio', 'action', null, _("Form"), '0');
+$tab[] = HTML_QuickForm2::createElement('radio', 'action', null, _("List"), '1');
+$tab[] = HTML_QuickForm2::createElement('radio', 'action', null, _("Form"), '0');
 $form->addGroup($tab, 'action', _("Post Validation"), '&nbsp;');
 $form->setDefaults(array('action' => '1'));
 
@@ -210,7 +210,7 @@ if ($valid) {
     /*
 	 * Apply a template definition
 	 */
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

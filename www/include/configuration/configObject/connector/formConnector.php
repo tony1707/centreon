@@ -87,7 +87,7 @@ try {
 
     $availableConnectors_list = return_plugin($oreon->optGen["cengine_path_connectors"]);
 
-    $form = new HTML_QuickForm('Form', 'post', "?p=".$p);
+    $form = new HTML_QuickForm2('Form', 'post', "?p=".$p);
 
     $form->addElement('header', 'information', _('General information'));
     if ($o == "a") {
@@ -124,8 +124,8 @@ try {
     $form->addElement('select2', 'command_id', _("Used by command"), array(), $attrCommands);
 
     $cntStatus = array();
-    $cntStatus[] = HTML_QuickForm::createElement('radio', 'connector_status', null, _("Enabled"), '1');
-    $cntStatus[] = HTML_QuickForm::createElement('radio', 'connector_status', null, _("Disabled"), '0');
+    $cntStatus[] = HTML_QuickForm2::createElement('radio', 'connector_status', null, _("Enabled"), '1');
+    $cntStatus[] = HTML_QuickForm2::createElement('radio', 'connector_status', null, _("Disabled"), '0');
     $form->addGroup($cntStatus, 'connector_status', _("Connector Status"), '&nbsp;&nbsp;');
 
     if (isset($cnt['connector_status']) && is_numeric($cnt['connector_status'])) {
@@ -189,7 +189,7 @@ try {
     if ($valid) {
         require_once($path."listConnector.php");
     } else {
-        $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+        $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
         $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
         $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
         $form->accept($renderer);

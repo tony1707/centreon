@@ -82,9 +82,9 @@ set_include_path(get_include_path() . PATH_SEPARATOR . $modules_path);
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once "HTML/QuickForm/advmultiselect.php";
-require_once "HTML/QuickForm/Renderer/ArraySmarty.php";
+require_once "HTML/QuickForm2.php";
+require_once "HTML/QuickForm2/advmultiselect.php";
+require_once "HTML/QuickForm2/Renderer/ArraySmarty.php";
 
 require_once $centreon_path . "/www/class/centreon-knowledge/procedures_DB_Connector.class.php";
 require_once $centreon_path . "/www/class/centreon-knowledge/procedures.class.php";

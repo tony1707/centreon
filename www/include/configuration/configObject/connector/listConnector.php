@@ -46,7 +46,7 @@ try {
 
     $tpl->assign('mode_access', $lvl_access);
 
-    $form = new HTML_QuickForm('Form', 'post', "?p=".$p);
+    $form = new HTML_QuickForm2('Form', 'post', "?p=".$p);
 
     $tpl->assign('msg', array(
         "addL"=>"?p=".$p."&o=a",
@@ -141,7 +141,7 @@ try {
     $tpl->assign("elemArr", $elemArr);
     $tpl->assign('p', $p);
     $tpl->assign('connectorsList', $connectorsList);
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $form->accept($renderer);
     $tpl->assign('form', $renderer->toArray());
     $tpl->assign('limit', $limit);

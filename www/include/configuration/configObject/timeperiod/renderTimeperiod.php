@@ -56,7 +56,7 @@ $tplist[0] = _("Select Timeperiod...");
 while ($row = $DBRESULT->fetchRow()) {
     $tplist[$row['tp_id']] = $row['tp_name'];
 }
-$form = new HTML_QuickForm('form', 'POST', "?p=" . $p . "&o=s");
+$form = new HTML_QuickForm2('form', 'POST', "?p=" . $p . "&o=s");
 $attrs1 = array('onchange' => "javascript: setTP(this.form.elements['tp_id'].value); submit();");
 $form->addElement('select', 'tp_id', null, $tplist, $attrs1);
 $form->setDefaults(array('tp_id' => null));
@@ -82,7 +82,7 @@ $form->addElement('text', 'tp_friday', _("Friday"), $attrsTextLong);
 $form->addElement('text', 'tp_saturday', _("Saturday"), $attrsTextLong);
 $tpl = new Smarty();
 $tpl = initSmartyTpl($path, $tpl);
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $labels = array(
     'unset_timerange' => _('Unset Timerange'),

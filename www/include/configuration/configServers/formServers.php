@@ -90,7 +90,7 @@ $attrsTextarea = array("rows" => "5", "cols" => "40");
 /*
  * Form begin
  */
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add a poller"));
 } elseif ($o == "c") {
@@ -123,18 +123,18 @@ $form->addElement('text', 'nagios_perfdata', _("Perfdata file"), $attrsText2);
 $form->addElement('text', 'ssh_port', _("SSH port"), $attrsText3);
 
 $Tab = array();
-$Tab[] = HTML_QuickForm::createElement('radio', 'localhost', null, _("Yes"), '1');
-$Tab[] = HTML_QuickForm::createElement('radio', 'localhost', null, _("No"), '0');
+$Tab[] = HTML_QuickForm2::createElement('radio', 'localhost', null, _("Yes"), '1');
+$Tab[] = HTML_QuickForm2::createElement('radio', 'localhost', null, _("No"), '0');
 $form->addGroup($Tab, 'localhost', _("Localhost ?"), '&nbsp;');
 
 $Tab = array();
-$Tab[] = HTML_QuickForm::createElement('radio', 'is_default', null, _("Yes"), '1');
-$Tab[] = HTML_QuickForm::createElement('radio', 'is_default', null, _("No"), '0');
+$Tab[] = HTML_QuickForm2::createElement('radio', 'is_default', null, _("Yes"), '1');
+$Tab[] = HTML_QuickForm2::createElement('radio', 'is_default', null, _("No"), '0');
 $form->addGroup($Tab, 'is_default', _("Is default poller ?"), '&nbsp;');
 
 $Tab = array();
-$Tab[] = HTML_QuickForm::createElement('radio', 'ns_activate', null, _("Enabled"), '1');
-$Tab[] = HTML_QuickForm::createElement('radio', 'ns_activate', null, _("Disabled"), '0');
+$Tab[] = HTML_QuickForm2::createElement('radio', 'ns_activate', null, _("Enabled"), '1');
+$Tab[] = HTML_QuickForm2::createElement('radio', 'ns_activate', null, _("Disabled"), '0');
 $form->addGroup($Tab, 'ns_activate', _("Status"), '&nbsp;');
 
 /*
@@ -277,7 +277,7 @@ if ($valid) {
     /*
      * Apply a template definition
      */
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

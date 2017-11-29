@@ -96,7 +96,7 @@ $attrHostgroups = array(
 /*
  * Create formulary
  */
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add a Host Group"));
 } elseif ($o == "c") {
@@ -161,8 +161,8 @@ $form->addElement('text', 'geo_coords', _("Geo coordinates"), $attrsText);
 $form->addElement('header', 'furtherInfos', _("Additional Information"));
 $form->addElement('textarea', 'hg_comment', _("Comments"), $attrsTextarea);
 
-$hgActivation[] = HTML_QuickForm::createElement('radio', 'hg_activate', null, _("Enabled"), '1');
-$hgActivation[] = HTML_QuickForm::createElement('radio', 'hg_activate', null, _("Disabled"), '0');
+$hgActivation[] = HTML_QuickForm2::createElement('radio', 'hg_activate', null, _("Enabled"), '1');
+$hgActivation[] = HTML_QuickForm2::createElement('radio', 'hg_activate', null, _("Disabled"), '0');
 $form->addGroup($hgActivation, 'hg_activate', _("Status"), '&nbsp;');
 $form->setDefaults(array('hg_activate' => '1'));
 
@@ -262,7 +262,7 @@ if ($valid) {
     /*
      * Apply a template definition
      */
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl, true);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl, true);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

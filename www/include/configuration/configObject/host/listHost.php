@@ -199,7 +199,7 @@ $DBRESULT->closeCursor();
  * Init Formulary
  */
 
-$form = new HTML_QuickForm('select_form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'POST', "?p=" . $p);
 
 /*
  * Different style between each lines
@@ -405,7 +405,7 @@ foreach (array('o1', 'o2') as $option) {
 
 $tpl->assign('limit', $limit);
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 
 $tpl->assign("search", stripslashes(str_replace('"', "&quot;", $search)));

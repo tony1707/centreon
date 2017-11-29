@@ -119,7 +119,7 @@ $contacts = $acl->getContactAclConf($aclOptions);
 
 $search = tidySearchKey($search, $advanced_search);
 
-$form = new HTML_QuickForm('select_form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('select_form', 'POST', "?p=" . $p);
 
 /*
  * Different style between each lines
@@ -288,7 +288,7 @@ $tpl->assign('searchC', $search);
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("listContact.ihtml");

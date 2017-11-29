@@ -82,7 +82,7 @@ $eTemplate = '<table><tr><td><div class="ams">{label_2}</div>' .
 #
 ## Form begin
 #
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 if ($o == "a") {
     $form->addElement('header', 'title', _("Add an Escalation"));
 } elseif ($o == "c") {
@@ -112,16 +112,16 @@ $form->addElement('select2', 'escalation_period', _("Escalation Period"), array(
 
 
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('checkbox', 'd', '&nbsp;', _("Down"));
-$tab[] = HTML_QuickForm::createElement('checkbox', 'u', '&nbsp;', _("Unreachable"));
-$tab[] = HTML_QuickForm::createElement('checkbox', 'r', '&nbsp;', _("Recovery"));
+$tab[] = HTML_QuickForm2::createElement('checkbox', 'd', '&nbsp;', _("Down"));
+$tab[] = HTML_QuickForm2::createElement('checkbox', 'u', '&nbsp;', _("Unreachable"));
+$tab[] = HTML_QuickForm2::createElement('checkbox', 'r', '&nbsp;', _("Recovery"));
 $form->addGroup($tab, 'escalation_options1', _("Hosts Escalation Options"), '&nbsp;&nbsp;');
 
 $tab = array();
-$tab[] = HTML_QuickForm::createElement('checkbox', 'w', '&nbsp;', _("Warning"));
-$tab[] = HTML_QuickForm::createElement('checkbox', 'u', '&nbsp;', _("Unknown"));
-$tab[] = HTML_QuickForm::createElement('checkbox', 'c', '&nbsp;', _("Critical"));
-$tab[] = HTML_QuickForm::createElement('checkbox', 'r', '&nbsp;', _("Recovery"));
+$tab[] = HTML_QuickForm2::createElement('checkbox', 'w', '&nbsp;', _("Warning"));
+$tab[] = HTML_QuickForm2::createElement('checkbox', 'u', '&nbsp;', _("Unknown"));
+$tab[] = HTML_QuickForm2::createElement('checkbox', 'c', '&nbsp;', _("Critical"));
+$tab[] = HTML_QuickForm2::createElement('checkbox', 'r', '&nbsp;', _("Recovery"));
 $form->addGroup($tab, 'escalation_options2', _("Services Escalation Options"), '&nbsp;&nbsp;');
 
 $form->addElement('textarea', 'esc_comment', _("Comments"), $attrsTextarea);
@@ -282,7 +282,7 @@ if ($valid) {
     require_once("listEscalation.php");
 } else {
     #Apply a template definition
-    $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl, true);
+    $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl, true);
     $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
     $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
     $form->accept($renderer);

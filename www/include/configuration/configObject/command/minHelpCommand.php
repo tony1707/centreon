@@ -115,7 +115,7 @@ if (strncmp(realpath($tab[0]), $oreon->optGen["nagios_path_plugins"], strlen($or
 }
 
 $attrsText = array("size" => "25");
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 $form->addElement('header', 'title', _("Plugin Help"));
 
 /*
@@ -134,7 +134,7 @@ $tpl = initSmartyTpl($path, $tpl);
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->assign('o', $o);
