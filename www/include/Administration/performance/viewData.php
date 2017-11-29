@@ -43,8 +43,8 @@ include_once("./include/monitoring/common-Func.php");
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 /*
  * Path to the option dir
@@ -285,7 +285,7 @@ include("./include/common/checkPagination.php");
 $tpl = new Smarty();
 $tpl = initSmartyTpl($path, $tpl);
 
-$form = new HTML_QuickForm('form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('form', 'POST', "?p=" . $p);
 
 ?>
     <script type="text/javascript">
@@ -399,7 +399,7 @@ if (isset($searchP)) {
     $tpl->assign('searchP', '');
 }
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("viewData.ihtml");

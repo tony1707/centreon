@@ -42,8 +42,8 @@ if (!isset($oreon)) {
 
 require_once "./include/monitoring/common-Func.php";
 
-require_once 'HTML/QuickForm.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once 'HTML/QuickForm2.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 unset($tpl);
 unset($path);
@@ -51,7 +51,7 @@ unset($path);
 /*
  * Time period select
  */
-$form = new HTML_QuickForm('form', 'post', "?p=".$p);
+$form = new HTML_QuickForm2('form', 'post', "?p=".$p);
 
 /*
  * Get Poller List
@@ -183,7 +183,7 @@ $path = "./include/Administration/corePerformance/";
 $tpl = new Smarty();
 $tpl = initSmartyTpl($path, $tpl, "./");
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 
 /*

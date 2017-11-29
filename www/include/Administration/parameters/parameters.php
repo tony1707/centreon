@@ -53,9 +53,9 @@ if (is_null($cg)) {
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/advmultiselect.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/advmultiselect.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 /*
  * Path to the option dir

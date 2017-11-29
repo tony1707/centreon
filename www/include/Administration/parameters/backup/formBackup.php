@@ -37,8 +37,8 @@ if (!isset($oreon)) {
     exit();
 }
 
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 $checkboxGroup = array(
     'backup_database_full',
@@ -63,14 +63,14 @@ $attrsText2 = array("size" => "3");
 /*
  * Form begin
  */
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 
 /*
  * General Options
  */
 $backupEnabled = array();
-$backupEnabled[] = HTML_QuickForm::createElement('radio', 'backup_enabled', null, _("Yes"), '1');
-$backupEnabled[] = HTML_QuickForm::createElement('radio', 'backup_enabled', null, _("No"), '0');
+$backupEnabled[] = HTML_QuickForm2::createElement('radio', 'backup_enabled', null, _("Yes"), '1');
+$backupEnabled[] = HTML_QuickForm2::createElement('radio', 'backup_enabled', null, _("No"), '0');
 $form->addGroup($backupEnabled, 'backup_enabled', _("Backup enabled"), '&nbsp;');
 $form->setDefaults(array('backup_enabled'=>'0'));
 $form->addElement('text', 'backup_backup_directory', _("Backup directory"), $attrsText);
@@ -85,25 +85,25 @@ $form->addRule('backup_tmp_directory', _("Mandatory field"), 'required');
 $form->addElement('checkbox', 'backup_database_centreon', _("Backup database centreon"));
 $form->addElement('checkbox', 'backup_database_centreon_storage', _("Backup database centreon_storage"));
 $backupDatabaseType = array();
-$backupDatabaseType[] = HTML_QuickForm::createElement('radio', 'backup_database_type', null, _("Dump"), '0');
-$backupDatabaseType[] = HTML_QuickForm::createElement('radio', 'backup_database_type', null, _("LVM Snapshot"), '1');
+$backupDatabaseType[] = HTML_QuickForm2::createElement('radio', 'backup_database_type', null, _("Dump"), '0');
+$backupDatabaseType[] = HTML_QuickForm2::createElement('radio', 'backup_database_type', null, _("LVM Snapshot"), '1');
 $form->addGroup($backupDatabaseType, 'backup_database_type', _("Backup type"), '&nbsp;');
 $form->setDefaults(array('backup_database_type'=>'1'));
-$backupDatabasePeriodFull[] = HTML_QuickForm::createElement('checkbox', '1', '&nbsp;', _("Monday"));
-$backupDatabasePeriodFull[] = HTML_QuickForm::createElement('checkbox', '2', '&nbsp;', _("Tuesday"));
-$backupDatabasePeriodFull[] = HTML_QuickForm::createElement('checkbox', '3', '&nbsp;', _("Wednesday"));
-$backupDatabasePeriodFull[] = HTML_QuickForm::createElement('checkbox', '4', '&nbsp;', _("Thursday"));
-$backupDatabasePeriodFull[] = HTML_QuickForm::createElement('checkbox', '5', '&nbsp;', _("Friday"));
-$backupDatabasePeriodFull[] = HTML_QuickForm::createElement('checkbox', '6', '&nbsp;', _("Saturday"));
-$backupDatabasePeriodFull[] = HTML_QuickForm::createElement('checkbox', '0', '&nbsp;', _("Sunday"));
+$backupDatabasePeriodFull[] = HTML_QuickForm2::createElement('checkbox', '1', '&nbsp;', _("Monday"));
+$backupDatabasePeriodFull[] = HTML_QuickForm2::createElement('checkbox', '2', '&nbsp;', _("Tuesday"));
+$backupDatabasePeriodFull[] = HTML_QuickForm2::createElement('checkbox', '3', '&nbsp;', _("Wednesday"));
+$backupDatabasePeriodFull[] = HTML_QuickForm2::createElement('checkbox', '4', '&nbsp;', _("Thursday"));
+$backupDatabasePeriodFull[] = HTML_QuickForm2::createElement('checkbox', '5', '&nbsp;', _("Friday"));
+$backupDatabasePeriodFull[] = HTML_QuickForm2::createElement('checkbox', '6', '&nbsp;', _("Saturday"));
+$backupDatabasePeriodFull[] = HTML_QuickForm2::createElement('checkbox', '0', '&nbsp;', _("Sunday"));
 $form->addGroup($backupDatabasePeriodFull, 'backup_database_full', _("Full backup"), '&nbsp;&nbsp;');
-$backupDatabasePeriodPartial[] = HTML_QuickForm::createElement('checkbox', '1', '&nbsp;', _("Monday"));
-$backupDatabasePeriodPartial[] = HTML_QuickForm::createElement('checkbox', '2', '&nbsp;', _("Tuesday"));
-$backupDatabasePeriodPartial[] = HTML_QuickForm::createElement('checkbox', '3', '&nbsp;', _("Wednesday"));
-$backupDatabasePeriodPartial[] = HTML_QuickForm::createElement('checkbox', '4', '&nbsp;', _("Thursday"));
-$backupDatabasePeriodPartial[] = HTML_QuickForm::createElement('checkbox', '5', '&nbsp;', _("Friday"));
-$backupDatabasePeriodPartial[] = HTML_QuickForm::createElement('checkbox', '6', '&nbsp;', _("Saturday"));
-$backupDatabasePeriodPartial[] = HTML_QuickForm::createElement('checkbox', '0', '&nbsp;', _("Sunday"));
+$backupDatabasePeriodPartial[] = HTML_QuickForm2::createElement('checkbox', '1', '&nbsp;', _("Monday"));
+$backupDatabasePeriodPartial[] = HTML_QuickForm2::createElement('checkbox', '2', '&nbsp;', _("Tuesday"));
+$backupDatabasePeriodPartial[] = HTML_QuickForm2::createElement('checkbox', '3', '&nbsp;', _("Wednesday"));
+$backupDatabasePeriodPartial[] = HTML_QuickForm2::createElement('checkbox', '4', '&nbsp;', _("Thursday"));
+$backupDatabasePeriodPartial[] = HTML_QuickForm2::createElement('checkbox', '5', '&nbsp;', _("Friday"));
+$backupDatabasePeriodPartial[] = HTML_QuickForm2::createElement('checkbox', '6', '&nbsp;', _("Saturday"));
+$backupDatabasePeriodPartial[] = HTML_QuickForm2::createElement('checkbox', '0', '&nbsp;', _("Sunday"));
 $form->addGroup($backupDatabasePeriodPartial, 'backup_database_partial', _("Partial backup"), '&nbsp;&nbsp;');
 $form->addElement('text', 'backup_retention', _("Backup retention"), $attrsText2);
 $form->addRule('backup_retention', _("Mandatory field"), 'required');
@@ -120,8 +120,8 @@ $form->addElement('text', 'backup_zend_conf', _("Zend configuration file path"),
  * Export Options
  */
 $scpEnabled = array();
-$scpEnabled[] = HTML_QuickForm::createElement('radio', 'backup_export_scp_enabled', null, _("Yes"), '1');
-$scpEnabled[] = HTML_QuickForm::createElement('radio', 'backup_export_scp_enabled', null, _("No"), '0');
+$scpEnabled[] = HTML_QuickForm2::createElement('radio', 'backup_export_scp_enabled', null, _("Yes"), '1');
+$scpEnabled[] = HTML_QuickForm2::createElement('radio', 'backup_export_scp_enabled', null, _("No"), '0');
 $form->addGroup($scpEnabled, 'backup_export_scp_enabled', _("SCP export enabled"), '&nbsp;');
 $form->setDefaults(array('backup_export_scp_enabled'=>'0'));
 $form->addElement('text', 'backup_export_scp_user', _("Remote user"), $attrsText);
@@ -178,7 +178,7 @@ $form->addElement(
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 $form->accept($renderer);

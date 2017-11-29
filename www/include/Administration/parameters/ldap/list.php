@@ -63,7 +63,7 @@ include "./include/common/checkPagination.php";
 $list = $ldapConf->getLdapConfigurationList($searchLdap, ($num * $limit), $limit);
 $tpl = initSmartyTpl($path.'ldap/', $tpl);
 
-$form = new HTML_QuickForm('select_form', 'POST', "?o=ldap&p=".$p);
+$form = new HTML_QuickForm2('select_form', 'POST', "?o=ldap&p=".$p);
 
 $tpl->assign('list', $list);
 $tpl->assign(
@@ -95,7 +95,7 @@ $o1->setSelected(null);
 $o2 = $form->getElement('o2');
 $o2->setValue(null);
 $o2->setSelected(null);
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('limit', $limit);
 $tpl->assign('form', $renderer->toArray());

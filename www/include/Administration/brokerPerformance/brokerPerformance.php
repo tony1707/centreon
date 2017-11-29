@@ -38,8 +38,8 @@ if (!isset($centreon)) {
 }
 
 require_once "./include/monitoring/common-Func.php";
-require_once 'HTML/QuickForm.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once 'HTML/QuickForm2.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 require_once "./class/centreonDB.class.php";
 require_once "./class/centreonGMT.class.php";
 require_once realpath(dirname(__FILE__) . "/../../../../config/centreon.config.php");
@@ -192,7 +192,7 @@ function parseStatsFile($statfile)
 $centreonGMT = new CentreonGMT($pearDB);
 $centreonGMT->getMyGMTFromSession(session_id(), $pearDB);
 
-$form = new HTML_QuickForm('form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('form', 'post', "?p=" . $p);
 
 /*
  * Get Poller List
@@ -229,7 +229,7 @@ $path = "./include/Administration/brokerPerformance/";
 $tpl = new Smarty();
 $tpl = initSmartyTpl($path, $tpl, "./");
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 

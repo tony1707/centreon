@@ -60,8 +60,8 @@ function searchUserName($user_name)
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 /*
  * Path to the configuration dir
@@ -113,9 +113,9 @@ if (isset($_POST["otype"])) {
 }
 
 /*
- * Init QuickForm
+ * Init QuickForm2
  */
-$form = new HTML_QuickForm('select_form', 'POST', "?p=".$p);
+$form = new HTML_QuickForm2('select_form', 'POST', "?p=".$p);
 
 /*
  * Init Smarty
@@ -305,7 +305,7 @@ while ($res = $DBRESULT->fetchRow()) {
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 
 $tpl->assign('form', $renderer->toArray());

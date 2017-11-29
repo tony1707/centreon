@@ -37,7 +37,7 @@ if (!isset($centreon)) {
     exit();
 }
 
-require_once 'HTML/QuickForm/select2.php';
+require_once 'HTML/QuickForm2/Element/Select2.php';
 
 $DBRESULT = $pearDB->query("SELECT * FROM `options`");
 while ($opt = $DBRESULT->fetchRow()) {
@@ -52,7 +52,7 @@ $attrsAdvSelect = null;
 /*
  * Form begin
  */
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 $form->addElement('header', 'title', _("Modify Centcore options"));
 
 /*
@@ -127,7 +127,7 @@ $form->addElement(
 /*
  * Apply a template definition
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 $form->accept($renderer);

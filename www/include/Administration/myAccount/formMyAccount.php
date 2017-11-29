@@ -38,13 +38,13 @@ if (!isset($centreon)) {
 }
 
 // Pear library
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/advmultiselect.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/advmultiselect.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 require_once "./include/common/common-Func.php";
 
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 
 /*
  * Path to the configuration dir
@@ -82,7 +82,7 @@ $langs = array();
 $langs = getLangs();
 $attrsText = array("size" => "35");
 
-$form = new HTML_QuickForm('Form', 'post', "?p=" . $p);
+$form = new HTML_QuickForm2('Form', 'post', "?p=" . $p);
 $form->addElement('header', 'title', _("Change my settings"));
 
 $form->addElement('header', 'information', _("General Information"));
@@ -254,7 +254,7 @@ if ($form->validate()) {
 }
 
 //Apply a template definition	
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 $form->accept($renderer);

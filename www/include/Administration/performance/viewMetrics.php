@@ -147,7 +147,7 @@ include_once "./include/common/checkPagination.php";
 $tpl = new Smarty();
 $tpl = initSmartyTpl($path, $tpl);
 
-$form = new HTML_QuickForm('form', 'POST', "?p=" . $p);
+$form = new HTML_QuickForm2('form', 'POST', "?p=" . $p);
 
 /*
  * Toolbar select
@@ -226,7 +226,7 @@ $tpl->assign("Locked", _("Locked"));
 
 $tpl->assign("data", $data);
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->display("viewMetrics.ihtml");
