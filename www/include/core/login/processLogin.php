@@ -34,6 +34,7 @@
  */
 
 require_once _CENTREON_PATH_ . 'bootstrap.php';
+require_once _CENTREON_PATH_ . '/www/lib/HTML/QuickForm2/Container.php';
 
 if (isset($_POST["centreon_token"])
     || (isset($_GET["autologin"]) &&

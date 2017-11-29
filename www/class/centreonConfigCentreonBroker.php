@@ -315,12 +315,12 @@ class CentreonConfigCentreonBroker
 
     public $arrayMultiple;
     /**
-     * Create the HTML_QuickForm object with element for a block
+     * Create the HTML_QuickForm2 object with element for a block
      *
      * @param int $blockId The block id ('tag_id'_'type_id')
      * @param int $page The centreon page id
      * @param int $formId The form post
-     * @return HTML_QuickForm
+     * @return HTML_QuickForm2
      */
     public function quickFormById($blockId, $page, $formId = 1, $config_id = 0)
     {
@@ -329,7 +329,7 @@ class CentreonConfigCentreonBroker
         $tag = $this->getTagName($tagId);
         $this->nbSubGroup = 1;
 
-        $qf = new HTML_QuickForm('form_' . $formId, 'post', '?p=' . $page);
+        $qf = new HTML_QuickForm2('form_' . $formId, 'post', '?p=' . $page);
 
         $qf->addElement(
             'text',
@@ -390,7 +390,7 @@ class CentreonConfigCentreonBroker
                     }
 
                     foreach ($this->getListValues($field['id']) as $key => $value) {
-                        $tmpRadio[] = HTML_QuickForm::createElement(
+                        $tmpRadio[] = HTML_QuickForm2::createElement(
                             'radio',
                             $field['fieldname'],
                             null,
@@ -880,7 +880,7 @@ class CentreonConfigCentreonBroker
                 }
             }
             $qf->setDefaults($formsInfos[$key]['defaults']);
-            $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+            $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
             $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
             $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
             $qf->accept($renderer);

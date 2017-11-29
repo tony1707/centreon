@@ -36,9 +36,9 @@
 require_once dirname(__FILE__) . "/centreon_configuration_objects.class.php";
 
 require_once __DIR__ . "/../../../GPL_LIB/Smarty/libs/Smarty.class.php";
-require_once __DIR__ . "/../../lib/HTML/QuickForm.php";
-require_once __DIR__ . "/../../lib/HTML/QuickForm/advmultiselect.php";
-require_once __DIR__ . "/../../lib/HTML/QuickForm/Renderer/ArraySmarty.php";
+require_once __DIR__ . "/../../lib/HTML/QuickForm2.php";
+require_once __DIR__."/../../lib/HTML/QuickForm2/advmultiselect.php";
+require_once __DIR__."/../../lib/HTML/QuickForm2/Renderer/ArraySmarty.php";
 
 class CentreonConfigurationBroker extends CentreonConfigurationObjects
 {
@@ -102,7 +102,7 @@ class CentreonConfigurationBroker extends CentreonConfigurationObjects
         /*
          * Apply a template definition
          */
-        $renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+        $renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
         $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
         $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
         $form->accept($renderer);

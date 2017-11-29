@@ -45,7 +45,7 @@ if (!isset($oreon)) {
  */
 $displayHSOptions = 0;
 
-$form_search = new HTML_QuickForm('quickSearchForm', 'POST', "?p=" . $p . "&o=" . $o);
+$form_search = new HTML_QuickForm2('quickSearchForm', 'POST', "?p=" . $p . "&o=" . $o);
 if (isset($_POST["search"])) {
     $search = $_POST["search"];
 } elseif (isset($_GET["search"])) {
@@ -192,7 +192,7 @@ $form_search->setDefaults($tab);
 $tpl = new Smarty();
 $tpl = initSmartyTpl("./include/common/", $tpl);
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form_search->accept($renderer);
 $tpl->assign('form_search', $renderer->toArray());
 $tpl->assign('p', $p);

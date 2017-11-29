@@ -215,7 +215,7 @@ class CentreonUtils
         $init = array();
         $initForm = $form->getElement('initialValues');
         $c = get_class($initForm);
-        if (!is_null($form) && $c != "HTML_QuickForm_Error") {
+        if (!is_null($form) && $c != "HTML_QuickForm2_Error") {
             $initialValues = unserialize($initForm->getValue());
             if (count($initialValues) && isset($initialValues[$key])) {
                 $init = $initialValues[$key];

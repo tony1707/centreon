@@ -83,11 +83,11 @@ $eTemplate  = '<table><tr><td><div class="ams">{label_2}</div>{unselected}</td><
 /**
  * Quickform
  */
-require_once 'HTML/QuickForm.php';
-require_once 'HTML/QuickForm/advmultiselect.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once 'HTML/QuickForm2.php';
+require_once 'HTML/QuickForm2/advmultiselect.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
-$form = new HTML_QuickForm('Form', 'post', "?p=103");
+$form = new HTML_QuickForm2('Form', 'post', "?p=103");
 $form->addElement('header', 'title', $title);
 $form->addElement('header', 'information', _("General Information"));
 
@@ -107,7 +107,7 @@ $form->setDefaults(array('action' => $action));
 /**
  * Renderer
  */
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($template, true);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($template, true);
 $renderer->setRequiredTemplate('{$label}&nbsp;<font color="red" size="1">*</font>');
 $renderer->setErrorTemplate('<font color="red">{$error}</font><br />{$html}');
 $form->accept($renderer);

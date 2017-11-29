@@ -40,9 +40,9 @@ if (!isset($centreon)) {
 /*
  * Pear library
  */
-require_once "HTML/QuickForm.php";
-require_once 'HTML/QuickForm/select2.php';
-require_once 'HTML/QuickForm/Renderer/ArraySmarty.php';
+require_once "HTML/QuickForm2.php";
+require_once 'HTML/QuickForm2/Element/Select2.php';
+require_once 'HTML/QuickForm2/Renderer/ArraySmarty.php';
 
 $user_params = array(
     "log_filter_host" => true,
@@ -164,7 +164,7 @@ if (isset($_GET['poller'])) {
 /*
  * Form begin
  */
-$form = new HTML_QuickForm('FormPeriod', 'get', "?p=" . $p);
+$form = new HTML_QuickForm2('FormPeriod', 'get', "?p=" . $p);
 $form->addElement('header', 'title', _("Choose the source"));
 
 $periods = array(
@@ -284,7 +284,7 @@ $form->addElement('select2', 'poller_filter', _("Pollers"), array(), $attrPoller
 
 $form->setDefaults(array("period" => $user_params['log_filter_period']));
 
-$renderer = new HTML_QuickForm_Renderer_ArraySmarty($tpl);
+$renderer = new HTML_QuickForm2_Renderer_ArraySmarty($tpl);
 $form->accept($renderer);
 $tpl->assign('form', $renderer->toArray());
 $tpl->assign('user_params', $user_params);
