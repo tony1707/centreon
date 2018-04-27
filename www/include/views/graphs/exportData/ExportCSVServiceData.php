@@ -66,13 +66,16 @@ if (isset($_GET['chartId'])) {
     if (false === isset($hostId) || false === isset($serviceId)) {
         die('Resource not found');
     }
+    if (!is_numeric($hostId) || !is_numeric($serviceId)) {
+        die('Bad resource id format');
+    }
     $res = $pearDBO->query('SELECT id
         FROM index_data
-        WHERE host_id = ' . $pearDBO->escape($hostId) .
-        ' AND service_id = ' . $pearDBO->escape($serviceId));
+        WHERE host_id = "' . $pearDBO->escape($hostId) .
+        '" AND service_id = "' . $pearDBO->escape($serviceId) . '"');
     if ($res->numRows()) {
         $row = $res->fetchRow();
-        $index = $row['id'];     
+        $index = $row['id'];
     } else {
         die('Resource not found');
     }
